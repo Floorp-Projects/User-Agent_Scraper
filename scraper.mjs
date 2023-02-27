@@ -7,10 +7,10 @@ const serverPortMax = 60999;
 let serverPort;
 while (true) {
     serverPort = Math.floor(Math.random() * ((serverPortMax - serverPortMin) + 1)) + serverPortMin;
-    let isPortFree = await new Promise(resolve => {
+    const isPortFree = await new Promise((resolve, reject) => {
         const tester = net.createServer()
             .once("error", function(e) {
-                if (e.code !== "EADDRINUSE") throw e;
+                if (e.code !== "EADDRINUSE") reject(e);
                 resolve(false);
             })
             .once("listening", function() {
