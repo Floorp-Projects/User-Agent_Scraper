@@ -30,12 +30,12 @@ const userAgent = new Promise((resolve, reject) => {
     }, 30000);
     let sockets = [], nextSocketId = 0;
     const server = http.createServer(function(request, response) {
-        clearTimeout(timeout);
         response.writeHead(
             request.method === "GET" ? 200 : 405,
             {"Content-Type": "text/plain"}
         );
         response.end("");
+        clearTimeout(timeout);
         this.close(function() {
             resolve(request.headers["user-agent"]);
         });
