@@ -1,0 +1,19 @@
+{
+  "name": "user-agent_scraper",
+  "version": "1.0.0",
+  "description": "This tool automatically retrieves the user agent from each browser.",
+  "main": "scraper.mjs",
+  "scripts": {
+    "start": "node scraper.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Floorp-Projects/User-Agent_Scraper.git"
+  },
+  "author": "Ablaze",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/Floorp-Projects/User-Agent_Scraper/issues"
+  },
+  "homepage": "https://github.com/Floorp-Projects/User-Agent_Scraper#readme"
+}
