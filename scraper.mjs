@@ -24,9 +24,13 @@ while (true) {
     if (isPortFree) break;
 }
 
-const userAgent = new Promise(resolve => {
+const userAgent = new Promise((resolve, reject) => {
+    const timeout = setTimeout(function() {
+        reject("Waited for a request from the browser, but it was never requested.");
+    }, 30000);
     let sockets = [], nextSocketId = 0;
     const server = http.createServer(function(request, response) {
+        clearTimeout(timeout);
         response.writeHead(
             request.method === "GET" ? 200 : 405,
             {"Content-Type": "text/plain"}
