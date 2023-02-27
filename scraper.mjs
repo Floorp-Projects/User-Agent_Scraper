@@ -1,9 +1,28 @@
 import http from "http";
 import child_process from "child_process";
+import net from "net";
 
 const serverPortMin = 32768;
 const serverPortMax = 60999;
-const serverPort = Math.floor(Math.random() * ((serverPortMax - serverPortMin) + 1)) + serverPortMin;
+let serverPort;
+while (true) {
+    serverPort = Math.floor(Math.random() * ((serverPortMax - serverPortMin) + 1)) + serverPortMin;
+    let isPortFree = await new Promise(resolve => {
+        const tester = net.createServer()
+            .once("error", function(e) {
+                if (e.code !== "EADDRINUSE") throw e;
+                resolve(false);
+            })
+            .once("listening", function() {
+                tester.once("close", function() {
+                    resolve(true);
+                })
+                .close();
+            })
+            .listen(serverPort, "127.0.0.1");
+    });
+    if (isPortFree) break;
+}
 
 const userAgent = new Promise(resolve => {
     let sockets = [], nextSocketId = 0;
