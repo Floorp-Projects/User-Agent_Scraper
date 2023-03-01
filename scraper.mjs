@@ -56,7 +56,12 @@ const userAgent = new Promise((resolve, reject) => {
 
 const browserProcess = child_process.execFile(
     process.argv[2],
-    [`http://localhost:${serverPort}`]
+    [`http://localhost:${serverPort}`],
+    {
+        env: {
+            "MOZ_AUTOMATION": "1",
+        },
+    },
 );
 
 console.log(await userAgent);
