@@ -10,7 +10,7 @@ while (true) {
     const isPortFree = await new Promise((resolve, reject) => {
         const tester = net.createServer()
             .once("error", function(e) {
-                if (e.code !== "EADDRINUSE") reject(e);
+                if (e.code !== "EADDRINUSE" && e.code !== "EACCES") reject(e);
                 resolve(false);
             })
             .once("listening", function() {
