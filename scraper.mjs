@@ -57,11 +57,7 @@ const userAgent = new Promise((resolve, reject) => {
 const browserProcess = child_process.execFile(
     process.argv[2],
     [`http://127.0.0.1:${serverPort}`],
-    {
-        env: {
-            "MOZ_AUTOMATION": "1",
-        },
-    },
+    process.platform === "win32" ? { env: { "MOZ_AUTOMATION": "1" } } : {},
 );
 
 console.log(await userAgent);
