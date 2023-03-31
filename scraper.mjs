@@ -5,6 +5,7 @@ import net from "net";
 const serverPortMin = 32768;
 const serverPortMax = 60999;
 let serverPort;
+let retryCountFindFreePort = 0;
 while (true) {
     serverPort = Math.floor(Math.random() * ((serverPortMax - serverPortMin) + 1)) + serverPortMin;
     const isPortFree = await new Promise((resolve, reject) => {
@@ -22,6 +23,8 @@ while (true) {
             .listen(serverPort, "127.0.0.1");
     });
     if (isPortFree) break;
+    if (retryCountFindFreePort >= 100) throw "No free ports were found. The port may be blocked by a firewall or other means.";
+    retryCountFindFreePort++;
 }
 
 const userAgent = new Promise((resolve, reject) => {
