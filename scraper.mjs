@@ -63,7 +63,7 @@ const browserProcess = child_process.execFile(
     process.platform === "win32" ? { env: { "MOZ_AUTOMATION": "1" } } : {},
 );
 
-console.log(await userAgent);
+process.stdout.write(await userAgent);
 
 browserProcess.kill();
 process.exit();
