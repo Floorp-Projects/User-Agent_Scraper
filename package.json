@@ -1,6 +1,6 @@
 {
   "name": "user-agent_scraper",
-  "version": "1.0.0",
+  "version": "none",
   "description": "This tool automatically retrieves the user agent from each browser.",
   "main": "scraper.mjs",
   "scripts": {
