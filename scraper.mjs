@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+"use strict";
+
 import http from "http";
 import child_process from "child_process";
 import net from "net";
